@@ -30,17 +30,19 @@ public class WinkTests {
     void initDriver() {
         driver = new ChromeDriver();
         driver.get("https://wink.ru/");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
     }
 
     @Test
     @DisplayName("Load to device form test")
-    void loadToDeviceTest() throws InterruptedException {
+    void loadToDeviceTest() {
         driver.manage().window().setSize(new Dimension(1920, 1080));
-        Thread.sleep(5000); //не вижу возможности привязать wait к элементу тк сайт не видит! xpath если не скроллить до нужного элемента
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,2500)", "");
+        while (driver.findElements(By.xpath("//h2[contains(text(), 'Кинопоиск')]/.." +
+                "/following::div[contains(@data-analytic, '143676210')]/ancestor::div[@class='swiper-wrapper']/div")).stream().count() == 0) {
+            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,2500)", "");
+        }
+
         List<WebElement> filmList = driver.findElements(By.xpath("//h2[contains(text(), 'Кинопоиск')]/.." +
                 "/following::div[contains(@data-analytic, '143676210')]/ancestor::div[@class='swiper-wrapper']/div"));
         filmList.get(1).click();
