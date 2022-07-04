@@ -44,9 +44,12 @@ public class TriangleTests {
     @Test
     @DisplayName("Тест проверяет вывод исключения если по введенным сторонам невозможно построить треугольник ")
     void exceptionWrongInput() {
-        Assertions.assertThrows(WrongInputException.class, () -> Triangle.triangleArea(2, 2, 7));
-        Assertions.assertThrows(WrongInputException.class, () -> Triangle.triangleArea(0, 1, 0));
-        Assertions.assertThrows(WrongInputException.class, () -> Triangle.triangleArea(-7, 3, 5));
+        Assertions.assertAll(
+                () -> Assertions.assertThrows(WrongInputException.class, () -> Triangle.triangleArea(2, 2, 7)),
+                () -> Assertions.assertThrows(WrongInputException.class, () -> Triangle.triangleArea(0, 1, 0)),
+                () -> Assertions.assertThrows(WrongInputException.class, () -> Triangle.triangleArea(-7, 3, 5))
+
+        );
 
     }
 
@@ -55,12 +58,13 @@ public class TriangleTests {
     @MethodSource("triangleDataProvider")
     void positiveTests(double a, double b, double c, double expectedArea) {
         double resultArea = Triangle.triangleArea(a, b, c);
-        assertThat(resultArea).isEqualTo(expectedArea);
+        // assertThat(resultArea).isEqualTo(expectedArea);
+        Assertions.assertEquals(expectedArea, resultArea, 000.1);
     }
 
     private static Stream<Arguments> triangleDataProvider() {
         return Stream.of(
-                Arguments.of(5, 5, 5, 10.825317547305483),
+                Arguments.of(5, 5, 5, 10.825),
                 Arguments.of(4, 5, 6, 9.921567416492215),
                 Arguments.of(7, 5, 7, 16.345871038277526),
                 Arguments.of(75464, 55464, 74645, 1.9339075885807748E9)

@@ -1,6 +1,7 @@
 package com.auto.main.lesson6;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,6 +15,8 @@ public class BaseView {
 
     public BaseView(WebDriver driver) {
         this.driver = driver;
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--ignore-certificate-errors");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);

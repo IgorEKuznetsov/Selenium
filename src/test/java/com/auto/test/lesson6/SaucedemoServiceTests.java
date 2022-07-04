@@ -4,12 +4,16 @@ import com.auto.main.lesson6.AuthSaucedemo;
 import com.auto.main.lesson6.AuthUser;
 import com.auto.main.lesson6.Products;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+@Feature("Аутентификация")
 public class SaucedemoServiceTests {
     WebDriver driver;
 
@@ -45,7 +49,8 @@ public class SaucedemoServiceTests {
     }
 
     @Test
-    @DisplayName("Add to cart test")
+    @Story("Покупка товара")
+    @Description("Проверка добавления товара в корзину")
     void addToCart() {
         new AuthSaucedemo(driver)
                 .login("standard_user", "secret_sauce")
