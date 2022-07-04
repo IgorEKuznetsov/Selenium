@@ -56,7 +56,7 @@ public class WinkTests {
     @ParameterizedTest
     @DisplayName("Popup tests")
     @MethodSource("menuDataProvider")
-    void clickPopupCheckNewPageIsOpenTest(String itemXpath, String headerXpath) {
+    void checkPageHeader(String itemXpath, String headerXpath) {
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(By.xpath("//button[contains(@class, 'item_dropdown')]")))
                 .click(driver.findElement(By.xpath(itemXpath)))

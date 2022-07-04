@@ -33,8 +33,8 @@ public class AuthTests {
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
     }
-
-    @ParameterizedTest
+/*
+  @ParameterizedTest
     @DisplayName("Positive auth tests")
     @MethodSource("accessUserDataProvider")
     void authFieldsPositiveTest(AuthUser user, boolean expectedMarketIsOpen) {
@@ -81,6 +81,8 @@ public class AuthTests {
                 Arguments.of(new AuthUser("problem_user", "secret_sauce"), true)
         );
     }
+ */
+
 
 
     @AfterEach

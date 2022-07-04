@@ -1,5 +1,6 @@
 package com.auto.main.lesson6;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,7 +23,8 @@ public class Products extends BaseView {
         return title;
     }
 
-    public ProductItem clickOnProductByName(String name){
+    @Step("Клик на товар по названию")
+    public ProductItem clickOnProductByName(String name) {
         productItems.stream()
                 .filter(item -> item.getText().contains(name))
                 .findFirst()
